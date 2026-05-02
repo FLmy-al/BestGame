@@ -3,16 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - NPC
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - Player
+  - 
   - 
   - 
   - 
@@ -41,13 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Ground
-    uniqueID: 1918570701
-    locked: 0
-  - name: Wall
-    uniqueID: 2093801473
-    locked: 0
-  - name: Player
-    uniqueID: 280386205
     locked: 0
