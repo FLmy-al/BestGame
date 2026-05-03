@@ -48,15 +48,14 @@ public class PlayerMovement : MonoBehaviour
         // 跳跃
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
         //松开空格减弱上升
-        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpCutMultiplier);
-        }
+        //if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
+        //{
+        //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpCutMultiplier);
+        //}
 
         // 下落加重重力
         if (rb.velocity.y < 0)
