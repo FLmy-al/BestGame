@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class DialogController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public DialogController dialogController;
+    private void OnMouseDown()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
