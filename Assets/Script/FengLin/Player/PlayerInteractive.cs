@@ -12,11 +12,15 @@ public class PlayerInteractive : MonoBehaviour
 
     private void Update()
     {
-        if(nearbyItem != null && Input.GetKeyDown(KeyCode.E))
+        if(nearbyItem != null && Input.GetKeyUp(KeyCode.E))
         {
             Debug.Log("与物品互动");
-            BackageManager.instance.AddItem(nearbyItem.Item);
-        }else
+            Item newitem = nearbyItem.Item.Clone();
+            BackageManager.instance.AddItem(newitem);
+            nearbyItem.gameObject.SetActive(false);
+            nearbyItem = null;
+        }
+        else
         {
             Debug.Log("无交互物体");
         }
@@ -30,13 +34,11 @@ public class PlayerInteractive : MonoBehaviour
             Debug.Log("范围内有可交互物体");
             collision.gameObject.GetComponent<InteractiveItem>().Tip.gameObject.SetActive(true);
             nearbyItem = collision.gameObject.GetComponent<InteractiveItem>();
-            //interactiveButton.gameObject.SetActive(true);
         }
 
         if (collision.tag == "NPC")
         {
             Debug.Log("范围内有可交互物体");
-            //interactiveButton.gameObject.SetActive(true);
         }
     }
     //推出检测范围
@@ -47,7 +49,6 @@ public class PlayerInteractive : MonoBehaviour
             Debug.Log("可交互物体超出范围");
             collision.gameObject.GetComponent<InteractiveItem>().Tip.gameObject.SetActive(false);
             nearbyItem = null;
-            //interactiveButton.gameObject.SetActive(false);
         }
     }
 }

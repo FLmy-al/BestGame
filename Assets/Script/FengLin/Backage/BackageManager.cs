@@ -6,7 +6,7 @@ public class BackageManager : MonoBehaviour
 {
     public InventorySlot[] slots;  // 所有背包格子
     public int inventorySize = 20; // 背包总格子数
-    private List<Item> items = new List<Item>(); //物品列表
+    public List<Item> items = new List<Item>(); //物品列表
 
     public static BackageManager instance; //单例模式
 

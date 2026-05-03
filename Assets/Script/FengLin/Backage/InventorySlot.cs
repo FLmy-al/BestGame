@@ -9,8 +9,12 @@ public class InventorySlot : MonoBehaviour
     public Image icon;           // 物品图标
     public TMP_Text countText;       // 数量文字
 
-    private Item item;           // 当前格子里的物品
+    public Item item;           // 当前格子里的物品
 
+    private void Start()
+    {
+        item = null;
+    }
     // 设置格子物品
     public void SetItem(Item newItem)
     {
