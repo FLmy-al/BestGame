@@ -27,8 +27,14 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;    // 水平输入
     private float originalGravityScale;
 
+    public static PlayerMovement instance;
+
     void Start()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
         // 获取组件
         rb = GetComponent<Rigidbody2D>();
         //anim = GetComponent<Animator>();
