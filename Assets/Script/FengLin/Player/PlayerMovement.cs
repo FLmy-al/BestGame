@@ -6,94 +6,102 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("移动设置")]
-    public float moveSpeed = 5f;       // 移动速度
+    public float moveSpeed = 5f;
 
     [Header("跳跃设置")]
-    public float jumpForce = 12f;      // 起跳初速度（调大一点，跳得更高）
-    public float jumpCutMultiplier = 0.5f; // 松开空格时的下落倍率
-    public float fallGravityMultiplier = 2.5f; // 下落时额外重力（数值越大掉得越快）
+    public float jumpForce = 12f;
+    public float jumpCutMultiplier = 0.5f;
+    public float fallGravityMultiplier = 2.5f;
 
     [Header("地面检测")]
-    public Transform groundCheck;     
+    public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
-    public LayerMask groundLayer;     // 选择地面层级
+    public LayerMask groundLayer;
 
-    [Header("角色组件")]
+    [Header("穿透平台设置")]
+    public float fallIgnoreTime = 0.2f;
+
     private Rigidbody2D rb;
-    //private Animator anim;
-    //private SpriteRenderer spriteRenderer;
+    private Collider2D playerCol;
 
-    private bool isGrounded;          // 是否在地面
-    private float horizontalInput;    // 水平输入
+    private bool isGrounded;
+    private float horizontalInput;
     private float originalGravityScale;
 
     public static PlayerMovement instance;
 
     void Start()
     {
-        if(instance == null)
-        {
+        if (instance == null)
             instance = this;
-        }
-        // 获取组件
-        rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
-        //spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // 保存原始重力缩放
+        rb = GetComponent<Rigidbody2D>();
+        playerCol = GetComponent<Collider2D>();
         originalGravityScale = rb.gravityScale;
     }
 
     void Update()
     {
-        // 检测是否在地面
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        // 获取水平输入（A/D 或 ←→）
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        // 跳跃（空格）
+        // 跳跃
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            Debug.Log("跳跃");
+            rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        // 跳跃松开
+        //松开空格减弱上升
         if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpCutMultiplier);
         }
 
-        // 下落时，额外增加重力，让下降速度更快
+        // 下落加重重力
         if (rb.velocity.y < 0)
         {
             rb.gravityScale = originalGravityScale * fallGravityMultiplier;
         }
         else
         {
-            // 上升或地面时恢复正常重力
             rb.gravityScale = originalGravityScale;
         }
 
-        // 角色翻转
-        if (horizontalInput != 0)
+        // 按S：只在单向平台下落，实心地面不动
+        if (Input.GetKeyDown(KeyCode.S) && isGrounded)
         {
-            //spriteRenderer.flipX = horizontalInput < 0;
+            CheckAndFallThrough();
         }
-
-        // 动画
-        //anim.SetBool("IsGrounded", isGrounded);
-        //anim.SetFloat("Speed", Mathf.Abs(horizontalInput));
     }
 
     void FixedUpdate()
     {
-        // 移动
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
     }
 
-    // 绘制地面检测范围（Scene 视图可见）
+    void CheckAndFallThrough()
+    {
+        // 检测脚下是不是 单向平台(PlatformEffector2D)
+        Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (hit == null) return;
+
+        // 如果脚下物体有 PlatformEffector2D，才允许下落
+        PlatformEffector2D platform = hit.GetComponent<PlatformEffector2D>();
+        if (platform != null)
+        {
+            StartCoroutine(FallPlatformCoroutine());
+        }
+    }
+
+    IEnumerator FallPlatformCoroutine()
+    {
+        // 临时忽略与平台碰撞
+        playerCol.enabled = false;
+        yield return new WaitForSeconds(fallIgnoreTime);
+        playerCol.enabled = true;
+    }
+
     void OnDrawGizmosSelected()
     {
         if (groundCheck != null)

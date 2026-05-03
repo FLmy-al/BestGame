@@ -6,9 +6,9 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
-    public Transform playerTransform; //玩家位置
+    public Vector3 playerPos; //玩家位置
     public int level; //关卡
-    public Dictionary<int, bool> playerChoice = new Dictionary<int, bool>();
+    public List<ChoiceData> playerChoices = new List<ChoiceData>(); //剧情节点
 
     //无参构造
     public SaveData() { }
@@ -18,10 +18,24 @@ public class SaveData
     /// <param name="playerTransform"></param>
     /// <param name="level"></param>
     /// <param name="playerChoice"></param>
-    public SaveData(Transform playerTransform, int level, Dictionary<int, bool> playerChoice)
+    public SaveData(Vector3 playerPos, int level, Dictionary<int, bool> playerChoice)
     {
-        this.playerTransform = playerTransform;
+        this.playerPos = playerPos;
         this.level = level;
-        this.playerChoice = playerChoice;
+        // 把 Dictionary 转成 List
+        foreach (var kvp in playerChoice)
+        {
+            playerChoices.Add(new ChoiceData()
+            {
+                id = kvp.Key,
+                selected = kvp.Value
+            });
+        }
     }
+}
+
+public class ChoiceData
+{
+    public int id;
+    public bool selected;
 }
