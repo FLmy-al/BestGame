@@ -65,6 +65,16 @@ public class NewBehaviourScript : MonoBehaviour
     /// 选项按钮父节点 用于排序--自动排列
     /// </summary>
     public Transform buttonGroup;
+
+    /// <summary>
+    /// 清除画布
+    /// </summary>
+    //private Canvas canvas;
+
+    /// <summary>
+    /// 打开画布
+    /// </summary>
+    public GameObject optencanvas;
     private void Awake()
     {
         images["甲"] = sprites[0];
@@ -75,6 +85,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         ReadText(duihua);
         Showneirong();
+        //canvas = GetComponentInParent<Canvas>();
         //UpdateText("甲", "你好，世界");
         //UpdateImage("乙", false);
     }
@@ -132,6 +143,7 @@ public class NewBehaviourScript : MonoBehaviour
             else if(cells[0] == "END" && int.Parse(cells[1]) == neirongindex)
             {
                 Debug.Log("剧情结束");
+                //canvas.enabled = false;
             }
         }
     }
@@ -150,9 +162,7 @@ public class NewBehaviourScript : MonoBehaviour
             button.GetComponentInChildren<TMP_Text>().text = cells[4];
             button.GetComponent<Button>().onClick.AddListener(delegate { OnOptionClick(int.Parse(cells[5])); });
             GenerateOption(_index + 1);
-        }
-
-        
+        } 
     }
     public void OnOptionClick(int _id)
     {
@@ -161,6 +171,22 @@ public class NewBehaviourScript : MonoBehaviour
         for(int i = 0; i < buttonGroup.childCount; i++)
         {
             Destroy(buttonGroup.GetChild(i).gameObject);
+        }
+    }
+
+    public void optenNeiRong()
+    {
+        if (optencanvas != null)
+        {
+            optencanvas.SetActive(true);
+            Debug.Log("对话打开");
+        }
+    }
+    public void closeNeiRong()
+    {
+        if(optencanvas != null)
+        {
+            optencanvas.SetActive(false);
         }
     }
 }
