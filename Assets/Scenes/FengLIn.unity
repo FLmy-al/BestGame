@@ -378,7 +378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &58378289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ RectTransform:
   - {fileID: 2092557093}
   - {fileID: 208624460}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -575,13 +575,14 @@ GameObject:
   - component: {fileID: 208624463}
   - component: {fileID: 208624462}
   - component: {fileID: 208624461}
+  - component: {fileID: 208624464}
   m_Layer: 5
   m_Name: ChoiseButton_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &208624460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -646,7 +647,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 208624462}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 208624464}
+        m_TargetAssemblyTypeName: ChoiseButton, Assembly-CSharp
+        m_MethodName: PutDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &208624462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,6 +698,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208624459}
   m_CullTransparentMesh: 1
+--- !u!114 &208624464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208624459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606bf53ace1c264448779a1ee59edece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextId: 0
 --- !u!1001 &264127946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -775,7 +801,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &443549591
 GameObject:
@@ -807,7 +833,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &443549593
 MonoBehaviour:
@@ -933,7 +959,7 @@ RectTransform:
   - {fileID: 2045899968}
   - {fileID: 1072442104}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1254,7 +1280,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &640585660
 GameObject:
@@ -1635,7 +1661,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -55.904}
 --- !u!1 &722004208
 GameObject:
@@ -2451,7 +2477,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -101.619}
 --- !u!1001 &1007090831
 PrefabInstance:
@@ -2853,7 +2879,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1213644491
 GameObject:
@@ -3192,7 +3218,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1291645673
 MonoBehaviour:
@@ -3302,7 +3328,7 @@ RectTransform:
   - {fileID: 1430033548}
   - {fileID: 767350787}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4074,9 +4100,42 @@ MonoBehaviour:
       speaker:
         name: bvbb
         sprite: {fileID: 21300000, guid: 66a873a7a86805c4aa035ec79360bf30, type: 3}
+      choises:
+      - nextId: 2
+        text: nextTo2
+      - nextId: 3
+        text: nextTo3
+    finished: 0
+  - Id: 2
+    narrativeContents:
+    - Content: second
+      speaker:
+        name: aaa
+        sprite: {fileID: 21300000, guid: 2e80b6574fa96494fbc7ad4386df3a20, type: 3}
+      choises: []
+    - Content: qqqq
+      speaker:
+        name: aaa
+        sprite: {fileID: 21300000, guid: 2e80b6574fa96494fbc7ad4386df3a20, type: 3}
       choises: []
     finished: 0
-  choises: []
+  - Id: 3
+    narrativeContents:
+    - Content: Third
+      speaker:
+        name: aaa
+        sprite: {fileID: 21300000, guid: 2e80b6574fa96494fbc7ad4386df3a20, type: 3}
+      choises: []
+    - Content: qqqq
+      speaker:
+        name: aaa
+        sprite: {fileID: 21300000, guid: 2e80b6574fa96494fbc7ad4386df3a20, type: 3}
+      choises: []
+    finished: 0
+  choises:
+  - {fileID: 2007440636}
+  - {fileID: 2092557094}
+  - {fileID: 208624461}
   UIcanvas: {fileID: 1301699599}
   NarrativeCanvas: {fileID: 58378291}
   SpeakerName: {fileID: 1856349995}
@@ -4086,6 +4145,7 @@ MonoBehaviour:
     name: 
     sprite: {fileID: 0}
   OnNarrative: 0
+  OnChoise: 0
   currentNode:
     Id: 0
     narrativeContents: []
@@ -4104,7 +4164,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1689365750
 GameObject:
@@ -4146,6 +4206,7 @@ MonoBehaviour:
     name: 
     sprite: {fileID: 0}
   OnNarrative: 0
+  OnChoise: 0
   currentNode:
     Id: 0
     narrativeContents: []
@@ -4164,7 +4225,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1690884107
 PrefabInstance:
@@ -4356,8 +4417,65 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45.975}
+--- !u!1001 &1815193041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4824904283962983568, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_Name
+      value: NPC (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.316222
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.033695698
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824904283962983574, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c04b42dbbd9c32347be387d153a2c6e5, type: 3}
 --- !u!1 &1853714913
 GameObject:
   m_ObjectHideFlags: 0
@@ -5018,13 +5136,14 @@ GameObject:
   - component: {fileID: 2007440638}
   - component: {fileID: 2007440637}
   - component: {fileID: 2007440636}
+  - component: {fileID: 2007440639}
   m_Layer: 5
   m_Name: ChoiseButton_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2007440635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5089,7 +5208,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2007440637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2007440639}
+        m_TargetAssemblyTypeName: ChoiseButton, Assembly-CSharp
+        m_MethodName: PutDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2007440637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5128,6 +5259,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007440634}
   m_CullTransparentMesh: 1
+--- !u!114 &2007440639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007440634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606bf53ace1c264448779a1ee59edece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextId: 0
 --- !u!1 &2017568667
 GameObject:
   m_ObjectHideFlags: 0
@@ -5528,13 +5672,14 @@ GameObject:
   - component: {fileID: 2092557096}
   - component: {fileID: 2092557095}
   - component: {fileID: 2092557094}
+  - component: {fileID: 2092557097}
   m_Layer: 5
   m_Name: ChoiseButton_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2092557093
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5599,7 +5744,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2092557095}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2092557097}
+        m_TargetAssemblyTypeName: ChoiseButton, Assembly-CSharp
+        m_MethodName: PutDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2092557095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5638,6 +5795,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092557092}
   m_CullTransparentMesh: 1
+--- !u!114 &2092557097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092557092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606bf53ace1c264448779a1ee59edece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextId: 0
 --- !u!1 &2106158657
 GameObject:
   m_ObjectHideFlags: 0
@@ -5747,7 +5917,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.929}
 --- !u!1001 &2131684269
 PrefabInstance:

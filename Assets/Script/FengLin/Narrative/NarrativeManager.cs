@@ -18,6 +18,7 @@ public class NarrativeManager : MonoBehaviour
     public Speaker currentSpeaker;     //当前说话人物
 
     public bool OnNarrative;           //是否打开对话界面
+    public bool OnChoise = false;              //是否需要选择选项
     public NarrativeNode currentNode;  //当前剧情节点
     public int ContentIndex = 0; //当前对话内容下标
 
@@ -37,7 +38,7 @@ public class NarrativeManager : MonoBehaviour
     private void Update()
     {
         //处于对话界面时，按鼠标左键更新文本
-        if(OnNarrative && Input.GetMouseButtonUp(0))
+        if(OnNarrative && !OnChoise && Input.GetMouseButtonDown(0))
         {
             if(ContentIndex >= currentNode.narrativeContents.Count)
             {
@@ -45,7 +46,6 @@ public class NarrativeManager : MonoBehaviour
             }else
             {
                 UpdateDialogue(currentNode.narrativeContents[ContentIndex]);
-                ContentIndex++;
             }
         }
     }
@@ -57,14 +57,14 @@ public class NarrativeManager : MonoBehaviour
         {
             return;
         }
+        ContentIndex = 0;
         UIcanvas.gameObject.SetActive(false);
         NarrativeCanvas.gameObject.SetActive(true);
         Time.timeScale = 0f;
         OnNarrative = true;
-        ContentIndex = 0;
+        OnChoise = false;
         UpdateDialogue(currentNode.narrativeContents[ContentIndex]);
         currentSpeaker = currentNode.narrativeContents[ContentIndex].speaker;
-        ContentIndex++;
     }
     //退出对话
     public void ExitNarrative()
@@ -81,17 +81,12 @@ public class NarrativeManager : MonoBehaviour
     {
         foreach(var node in narrativeChoice)
         {
-            if(node.finished == true)
-            {
-                Debug.Log("剧情已完成");
-                return null;
-            }
-            if(node.Id == id)
+            if(node.Id == id && !node.finished)
             {
                 return node;
             }
         }
-        Debug.Log("未找到剧情节点");
+        Debug.Log("未找到剧情节点或剧情已完成");
         return null;
     }
     //更新对话显示
@@ -103,7 +98,21 @@ public class NarrativeManager : MonoBehaviour
             SpeakerName.text = narrativeContent.speaker.name;
             SpeakerImage.sprite = narrativeContent.speaker.sprite;
         }
+
+        if(narrativeContent.choises.Count != 0)
+        {
+            for(int i = 0; i < narrativeContent.choises.Count;  i++)
+            {
+                choises[i].gameObject.SetActive(true);
+                choises[i].GetComponent<ChoiseButton>().nextId = narrativeContent.choises[i].nextId;
+                choises[i].GetComponentInChildren<TMP_Text>().text = narrativeContent.choises[i].text;
+            }
+            OnChoise = true;
+        }
+        Debug.Log(OnChoise);
         
         dialogueText.text = narrativeContent.Content;
+        ContentIndex++;
+        Debug.Log(ContentIndex);
     }
 }

@@ -23,11 +23,17 @@ public class NarrativeContent
 {
     public string Content;  //对话文本
     public Speaker speaker;  //说话人
-    public List<string> choises = new List<string>(); //分支选项列表
+    public List<Choise> choises = new List<Choise>(); //分支选项列表
 }
 [Serializable]
 public class Speaker
 {
     public string name;      //姓名
     public Sprite sprite;    //立绘
+}
+[Serializable]
+public class Choise
+{
+    public int nextId;    //连接的对话节点id
+    public string text;   //选项文本
 }
