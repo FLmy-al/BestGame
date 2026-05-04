@@ -9,6 +9,7 @@ public class PlayerInteractive : MonoBehaviour
 
     [SerializeField] private Image interactiveButton;
     [SerializeField] private InteractiveItem nearbyItem;
+    [SerializeField] private NPC nearbyNpc;
 
     private void Update()
     {
@@ -19,6 +20,9 @@ public class PlayerInteractive : MonoBehaviour
             BackageManager.instance.AddItem(newitem);
             nearbyItem.gameObject.SetActive(false);
             nearbyItem = null;
+        }else if(nearbyNpc != null && Input.GetKeyUp(KeyCode.E))
+        {
+            NarrativeManager.instance.EnterNarrative(nearbyNpc.narrativeId);
         }
         else
         {
@@ -39,9 +43,11 @@ public class PlayerInteractive : MonoBehaviour
         if (collision.tag == "NPC")
         {
             Debug.Log("范围内有可交互物体");
+            collision.gameObject.GetComponent<NPC>().Tip.gameObject.SetActive(true);
+            nearbyNpc = collision.gameObject.GetComponent<NPC>();
         }
     }
-    //推出检测范围
+    //退出检测范围
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.tag == "Item")
@@ -49,6 +55,13 @@ public class PlayerInteractive : MonoBehaviour
             Debug.Log("可交互物体超出范围");
             collision.gameObject.GetComponent<InteractiveItem>().Tip.gameObject.SetActive(false);
             nearbyItem = null;
+        }
+
+        if (collision.tag == "NPC")
+        {
+            Debug.Log("可交互物体超出范围");
+            collision.gameObject.GetComponent<NPC>().Tip.gameObject.SetActive(false);
+            nearbyNpc = null;
         }
     }
 }

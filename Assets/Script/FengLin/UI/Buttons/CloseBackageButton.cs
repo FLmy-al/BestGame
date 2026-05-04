@@ -8,5 +8,6 @@ public class CloseBackageButton : MonoBehaviour
     public void PutDown()
     {
         backageCanvas.gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
     }
 }

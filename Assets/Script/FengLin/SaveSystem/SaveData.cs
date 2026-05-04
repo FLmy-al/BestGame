@@ -8,7 +8,7 @@ public class SaveData
 {
     public Vector3 playerPos; //玩家位置
     public int level; //关卡
-    public List<ChoiceData> playerChoices = new List<ChoiceData>(); //剧情节点
+    public List<NarrativeNode> playerChoices = new List<NarrativeNode>(); //剧情节点
 
     //无参构造
     public SaveData() { }
@@ -18,24 +18,13 @@ public class SaveData
     /// <param name="playerTransform"></param>
     /// <param name="level"></param>
     /// <param name="playerChoice"></param>
-    public SaveData(Vector3 playerPos, int level, Dictionary<int, bool> playerChoice)
+    public SaveData(Vector3 playerPos, int level, List<NarrativeNode> playerChoice)
     {
+        //保存玩家位置
         this.playerPos = playerPos;
+        //保存关卡
         this.level = level;
-        // 把 Dictionary 转成 List
-        foreach (var kvp in playerChoice)
-        {
-            playerChoices.Add(new ChoiceData()
-            {
-                id = kvp.Key,
-                selected = kvp.Value
-            });
-        }
+        //保存剧情进度
+        this.playerChoices = playerChoice;
     }
-}
-
-public class ChoiceData
-{
-    public int id;
-    public bool selected;
 }

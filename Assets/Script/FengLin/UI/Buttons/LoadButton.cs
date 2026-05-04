@@ -12,9 +12,6 @@ public class LoadButton : MonoBehaviour
         PlayerMovement.instance.transform.position = saveData.playerPos;
         // 恢复剧情选择（把 List 转回 Dictionary）
         NarrativeManager.instance.narrativeChoice.Clear();
-        foreach (var choice in saveData.playerChoices)
-        {
-            NarrativeManager.instance.narrativeChoice.Add(choice.id, choice.selected);
-        }
+        NarrativeManager.instance.narrativeChoice = saveData.playerChoices;
     }
 }

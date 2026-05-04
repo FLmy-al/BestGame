@@ -1,12 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NarrativeManager : MonoBehaviour
 {
     public static NarrativeManager instance;
 
-    public Dictionary<int,bool> narrativeChoice = new Dictionary<int,bool>();
+    public List<NarrativeNode> narrativeChoice = new List<NarrativeNode>(); //剧情节点列表
+    public List<Button> choises = new List<Button>();  //分支选项按钮
+    public Canvas UIcanvas;            //UI画布
+    public Canvas NarrativeCanvas;     //对话画布
+    public TMP_Text SpeakerName;       //说话人姓名
+    public TMP_Text dialogueText;      //剧情文本
+    public Image SpeakerImage;         //说话人立绘
+    public Speaker currentSpeaker;     //当前说话人物
+
+    public bool OnNarrative;           //是否打开对话界面
+    public NarrativeNode currentNode;  //当前剧情节点
+    public int ContentIndex = 0; //当前对话内容下标
+
     private void Start()
     {
         if(instance == null)
@@ -18,5 +32,78 @@ public class NarrativeManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        //处于对话界面时，按鼠标左键更新文本
+        if(OnNarrative && Input.GetMouseButtonUp(0))
+        {
+            if(ContentIndex >= currentNode.narrativeContents.Count)
+            {
+                ExitNarrative();
+            }else
+            {
+                UpdateDialogue(currentNode.narrativeContents[ContentIndex]);
+                ContentIndex++;
+            }
+        }
+    }
+    //进入对话
+    public void EnterNarrative(int id)
+    {
+        currentNode = GetNarrativeNode(id);
+        if(currentNode == null)
+        {
+            return;
+        }
+        UIcanvas.gameObject.SetActive(false);
+        NarrativeCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+        OnNarrative = true;
+        ContentIndex = 0;
+        UpdateDialogue(currentNode.narrativeContents[ContentIndex]);
+        currentSpeaker = currentNode.narrativeContents[ContentIndex].speaker;
+        ContentIndex++;
+    }
+    //退出对话
+    public void ExitNarrative()
+    {
+        UIcanvas.gameObject.SetActive(true);
+        NarrativeCanvas.gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
+        OnNarrative = false;
+        currentNode.Finish();
+        currentNode = null;
+    }
+    //通过id寻找剧情节点
+    public NarrativeNode GetNarrativeNode(int id)
+    {
+        foreach(var node in narrativeChoice)
+        {
+            if(node.finished == true)
+            {
+                Debug.Log("剧情已完成");
+                return null;
+            }
+            if(node.Id == id)
+            {
+                return node;
+            }
+        }
+        Debug.Log("未找到剧情节点");
+        return null;
+    }
+    //更新对话显示
+    public void UpdateDialogue(NarrativeContent narrativeContent)
+    {
+        if(currentSpeaker != narrativeContent.speaker)
+        {
+            currentSpeaker = narrativeContent.speaker;
+            SpeakerName.text = narrativeContent.speaker.name;
+            SpeakerImage.sprite = narrativeContent.speaker.sprite;
+        }
+        
+        dialogueText.text = narrativeContent.Content;
     }
 }
