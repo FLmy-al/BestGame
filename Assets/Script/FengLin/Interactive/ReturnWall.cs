@@ -2,14 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : MonoBehaviour,ISaveInterface
+public class ReturnWall : MonoBehaviour,ISaveInterface
 {
-    public int narrativeId;
-    public GameObject Tip; // 接近提示
+    public Vector3 returnPos = new Vector3(-47, 0, 0);
+    public int narrativeNodeid;
 
-    public string UniqueId;
+    public string UniqueId; //场景标识id
 
     public string GetUniqueId() => UniqueId;
+
+    public void SetNarrativeNode()
+    {
+        foreach (var node in NarrativeManager.instance.narrativeChoice)
+        {
+            if (node.Id == narrativeNodeid)
+            {
+                node.finished = false;
+            }
+        }
+    }
 
     public ObjectState SaveState()
     {

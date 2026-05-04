@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class BackageManager : MonoBehaviour
@@ -80,6 +81,20 @@ public class BackageManager : MonoBehaviour
         }
     }
 
+    public bool FindItem(string itemName)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] != null && items[i].name == itemName)
+            {
+                Debug.Log("找到物品" +  items[i].name);
+                return true;
+            }
+        }
+        Debug.Log("未找到物品");
+        return false;
+    }
+
     // 更新所有格子的UI显示
     public void UpdateUI()
     {
@@ -87,5 +102,39 @@ public class BackageManager : MonoBehaviour
         {
             slots[i].SetItem(items[i]);
         }
+    }
+
+    // 从存档恢复背包
+    public void LoadInventoryFromSave(List<Item> savedItems)
+    {
+        // 清空当前背包
+        items.Clear();
+        for (int i = 0; i < inventorySize; i++)
+        {
+            items.Add(null);
+        }
+
+        // 恢复存档里的物品
+        for (int i = 0; i < savedItems.Count && i < items.Count; i++)
+        {
+            var saveItem = savedItems[i];
+            if (saveItem == null)
+            {
+                items[i] = null;
+                continue;
+            }
+
+            // 找到对应物品（你项目里的 Item 数据源）
+            Item originalItem = ItemManager.instance.GetItemById(saveItem.id);
+            if (originalItem != null)
+            {
+                Item newItem = originalItem.Clone();
+                newItem.count = saveItem.count;
+                items[i] = newItem;
+            }
+        }
+
+        // 刷新UI
+        UpdateUI();
     }
 }

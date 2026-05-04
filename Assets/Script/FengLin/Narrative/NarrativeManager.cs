@@ -105,7 +105,12 @@ public class NarrativeManager : MonoBehaviour
             {
                 choises[i].gameObject.SetActive(true);
                 choises[i].GetComponent<ChoiseButton>().nextId = narrativeContent.choises[i].nextId;
+                choises[i].GetComponent<ChoiseButton>().needItemName = narrativeContent.choises[i].needItemName;
                 choises[i].GetComponentInChildren<TMP_Text>().text = narrativeContent.choises[i].text;
+                if(narrativeContent.choises[i].colldier != null)
+                {
+                    choises[i].GetComponent<ChoiseButton>().colldier = narrativeContent.choises[i].colldier;
+                }
             }
             OnChoise = true;
         }

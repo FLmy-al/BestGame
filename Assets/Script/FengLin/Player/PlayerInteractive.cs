@@ -24,10 +24,6 @@ public class PlayerInteractive : MonoBehaviour
         {
             NarrativeManager.instance.EnterNarrative(nearbyNpc.narrativeId);
         }
-        else
-        {
-            Debug.Log("无交互物体");
-        }
     }
 
     //进入检测范围
@@ -45,6 +41,12 @@ public class PlayerInteractive : MonoBehaviour
             Debug.Log("范围内有可交互物体");
             collision.gameObject.GetComponent<NPC>().Tip.gameObject.SetActive(true);
             nearbyNpc = collision.gameObject.GetComponent<NPC>();
+        }
+
+        if(collision.tag == "collider")
+        {
+            PlayerMovement.instance.transform.position = collision.gameObject.GetComponent<ReturnWall>().returnPos;
+            collision.gameObject.GetComponent<ReturnWall>().SetNarrativeNode();
         }
     }
     //退出检测范围
