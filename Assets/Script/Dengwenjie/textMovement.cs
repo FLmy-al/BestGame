@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-public class PlayerMovement : MonoBehaviour
+public class textMovement : MonoBehaviour
 {
+    // Start is called before the first frame update
     [Header("“∆∂Ø…Ë÷√")]
     public float moveSpeed = 5f;
 
@@ -28,8 +29,10 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private float originalGravityScale;
 
-    public static PlayerMovement instance;
-    
+    public static textMovement instance;
+
+    private Animator animator;
+
     void Start()
     {
         if (instance == null)
@@ -38,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerCol = GetComponent<Collider2D>();
         originalGravityScale = rb.gravityScale;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -72,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
         {
             CheckAndFallThrough();
         }
+
+        UpdateAnimation(rb.velocity.x, rb.velocity.y);
     }
 
     void FixedUpdate()
@@ -109,4 +115,32 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
+
+    void UpdateAnimation(float x, float y)
+    {
+        if (y != 0)
+        {
+            animator.SetBool("isjump", true);
+        }
+        else
+        {
+            animator.SetBool("isjump", false);
+        }
+
+        if (x > 0)
+        {
+            animator.SetBool("iswalk", true);
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (x < 0)
+        {
+            animator.SetBool("iswalk", true);
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            animator.SetBool("iswalk", false);
+        }
+    }
+
 }
