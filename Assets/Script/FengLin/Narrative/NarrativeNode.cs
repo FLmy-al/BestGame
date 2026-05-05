@@ -36,6 +36,6 @@ public class Choise
 {
     public int nextId;    //连接的对话节点id
     public string text;   //选项文本
-    public string needItemName; //需要的物品名
+    public List<string> needItemName; //需要的物品名
     public GameObject colldier; //碰撞箱
 }

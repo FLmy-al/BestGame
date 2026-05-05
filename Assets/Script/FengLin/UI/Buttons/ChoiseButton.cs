@@ -6,21 +6,20 @@ using UnityEngine.UI;
 public class ChoiseButton : MonoBehaviour
 {
     public int nextId;  //对应下一段文本id
-    public string needItemName; //需要的物品名
+    public List<string> needItemName; //需要的物品名
     public GameObject colldier; //碰撞箱
     public void PutDown()
     {
         // 先判断是否需要物品
         bool hasRequiredItem = true;
-        if (!string.IsNullOrEmpty(needItemName))
+        if (needItemName.Count != 0)
         {
-            hasRequiredItem = BackageManager.instance.FindItem(needItemName);
+            hasRequiredItem = CheckItems();
         }
 
         // 如果需要物品但没有，直接返回（不执行后续操作）
         if (!hasRequiredItem)
         {
-            Debug.Log("缺少所需物品：" + needItemName);
             return;
         }else
         {
@@ -47,5 +46,18 @@ public class ChoiseButton : MonoBehaviour
         {
             NarrativeManager.instance.EnterNarrative(nextId);
         }
+    }
+
+    private bool CheckItems()
+    {
+        foreach(var b in needItemName)
+        {
+            if(!BackageManager.instance.FindItem(b))
+            {
+                Debug.Log("缺少所需物品：" + b);
+                return false;
+            }
+        }
+        return true;
     }
 }

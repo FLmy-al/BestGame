@@ -32,21 +32,32 @@ public class PlayerInteractive : MonoBehaviour
         if(collision.tag == "Item")
         {
             Debug.Log("范围内有可交互物体");
-            collision.gameObject.GetComponent<InteractiveItem>().Tip.gameObject.SetActive(true);
+            if(collision.gameObject.GetComponent<InteractiveItem>().Tip != null)
+            {
+                collision.gameObject.GetComponent<InteractiveItem>().Tip.gameObject.SetActive(true);
+            }
             nearbyItem = collision.gameObject.GetComponent<InteractiveItem>();
         }
 
         if (collision.tag == "NPC")
         {
             Debug.Log("范围内有可交互物体");
-            collision.gameObject.GetComponent<NPC>().Tip.gameObject.SetActive(true);
-            nearbyNpc = collision.gameObject.GetComponent<NPC>();
+            if(collision.gameObject.GetComponent<NPC>().Tip != null)
+            {
+                collision.gameObject.GetComponent<NPC>().Tip.gameObject.SetActive(true);
+                nearbyNpc = collision.gameObject.GetComponent<NPC>();
+            }
         }
 
         if(collision.tag == "collider")
         {
             PlayerMovement.instance.transform.position = collision.gameObject.GetComponent<ReturnWall>().returnPos;
             collision.gameObject.GetComponent<ReturnWall>().SetNarrativeNode();
+        }
+
+        if(collision.tag == "InteractiveCollider")
+        {
+            NarrativeManager.instance.EnterNarrative(collision.gameObject.GetComponent<NPC>().narrativeId);
         }
     }
     //退出检测范围
@@ -55,15 +66,21 @@ public class PlayerInteractive : MonoBehaviour
         if(collision.tag == "Item")
         {
             Debug.Log("可交互物体超出范围");
-            collision.gameObject.GetComponent<InteractiveItem>().Tip.gameObject.SetActive(false);
+            if (collision.gameObject.GetComponent<InteractiveItem>().Tip != null)
+            {
+                collision.gameObject.GetComponent<InteractiveItem>().Tip.gameObject.SetActive(false);
+            }
             nearbyItem = null;
         }
 
         if (collision.tag == "NPC")
         {
             Debug.Log("可交互物体超出范围");
-            collision.gameObject.GetComponent<NPC>().Tip.gameObject.SetActive(false);
-            nearbyNpc = null;
+            if (collision.gameObject.GetComponent<NPC>().Tip != null)
+            {
+                collision.gameObject.GetComponent<NPC>().Tip.gameObject.SetActive(false);
+                nearbyNpc = null;
+            }
         }
     }
 }
