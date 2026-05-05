@@ -48,7 +48,7 @@ public class BackageManager : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
         {
-            if (items[i] == null)
+            if (items[i] != null)
             {
                 items[i] = newItem;
                 UpdateUI();
