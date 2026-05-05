@@ -1,14 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class InteractiveItem : MonoBehaviour,ISaveInterface
+public class NPC : MonoBehaviour,ISaveInterface
 {
-    [SerializeField]private Item item;
+    public int narrativeId;
     public GameObject Tip; // 接近提示
-    public Item Item => item; //可获得物品
+
     public string UniqueId;
 
     public string GetUniqueId() => UniqueId;
@@ -29,5 +27,4 @@ public class InteractiveItem : MonoBehaviour,ISaveInterface
         transform.position = state.position;
         transform.rotation = state.rotation;
     }
-
 }

@@ -1,41 +1,24 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class SaveData
 {
-    public Vector3 playerPos; //玩家位置
-    public int level; //关卡
-    public List<ChoiceData> playerChoices = new List<ChoiceData>(); //剧情节点
+    public Vector3 playerPos;
+    public int level;
+    public List<NarrativeNode> playerChoices = new List<NarrativeNode>();
+    public List<Item> inventoryItems = new List<Item>();
 
-    //无参构造
+    // 改用 List 才能被 Json 正常保存
+    public List<ObjectState> allObjStates = new List<ObjectState>();
+
     public SaveData() { }
-    /// <summary>
-    /// 带参构造 玩家位置，关卡编号，分支选择
-    /// </summary>
-    /// <param name="playerTransform"></param>
-    /// <param name="level"></param>
-    /// <param name="playerChoice"></param>
-    public SaveData(Vector3 playerPos, int level, Dictionary<int, bool> playerChoice)
+
+    public SaveData(Vector3 playerPos, int level, List<NarrativeNode> playerChoice)
     {
         this.playerPos = playerPos;
         this.level = level;
-        // 把 Dictionary 转成 List
-        foreach (var kvp in playerChoice)
-        {
-            playerChoices.Add(new ChoiceData()
-            {
-                id = kvp.Key,
-                selected = kvp.Value
-            });
-        }
+        this.playerChoices = playerChoice;
     }
-}
-
-public class ChoiceData
-{
-    public int id;
-    public bool selected;
 }

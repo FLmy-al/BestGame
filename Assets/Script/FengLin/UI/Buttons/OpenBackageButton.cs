@@ -9,5 +9,6 @@ public class OpenBackageButton : MonoBehaviour
     {
         backageCanvas.gameObject.SetActive(true);
         BackageManager.instance.UpdateUI();
+        Time.timeScale = 0f;
     }
 }

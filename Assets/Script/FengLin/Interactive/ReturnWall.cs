@@ -1,17 +1,26 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class InteractiveItem : MonoBehaviour,ISaveInterface
+public class ReturnWall : MonoBehaviour,ISaveInterface
 {
-    [SerializeField]private Item item;
-    public GameObject Tip; // 接近提示
-    public Item Item => item; //可获得物品
-    public string UniqueId;
+    public Vector3 returnPos = new Vector3(-47, 0, 0);
+    public int narrativeNodeid;
+
+    public string UniqueId; //场景标识id
 
     public string GetUniqueId() => UniqueId;
+
+    public void SetNarrativeNode()
+    {
+        foreach (var node in NarrativeManager.instance.narrativeChoice)
+        {
+            if (node.Id == narrativeNodeid)
+            {
+                node.finished = false;
+            }
+        }
+    }
 
     public ObjectState SaveState()
     {
@@ -29,5 +38,4 @@ public class InteractiveItem : MonoBehaviour,ISaveInterface
         transform.position = state.position;
         transform.rotation = state.rotation;
     }
-
 }
