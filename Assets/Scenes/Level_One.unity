@@ -4247,7 +4247,7 @@ MonoBehaviour:
     - Content: "\u2026\u2026\u4ED6\u559D\u5927\u4E86\u5C31\u53EA\u4F1A\u8BF4\u8FD9\u4E48\u51E0\u53E5\u8BDD\u3002"
       speaker:
         name: "\u9648\u8FF9"
-        sprite: {fileID: 21300000, guid: 7d6af381c397f9e4da5b8f495c99811d, type: 3}
+        sprite: {fileID: 0}
       choises: []
     - Content: "\u9152\u2026\u2026\u9152\u2026\u2026"
       speaker:
