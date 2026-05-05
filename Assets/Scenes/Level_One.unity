@@ -2671,7 +2671,7 @@ MonoBehaviour:
     description: "\u9152\u9189\u4E4B\u4EBA\u7684\u7075\u4E39\u5999\u836F"
     icon: {fileID: 21300000, guid: 9a6cc84a9fa938b439748edf6561bdef, type: 3}
     count: 1
-    isStackable: 0
+    isStackable: 1
   Tip: {fileID: 0}
   UniqueId: 1001
 --- !u!58 &743361319
@@ -3220,7 +3220,7 @@ MonoBehaviour:
     description: "\u4E00\u76F4\u4E22\u5728\u8FD9\u91CC\u7684\u7834\u788E\u98DE\u5251\uFF08\u6216\u8BB8\u662F\u98DE\u5251\uFF1F\uFF09"
     icon: {fileID: 21300000, guid: 4cac801b0b3e96b478fd7f915a5cece1, type: 3}
     count: 1
-    isStackable: 0
+    isStackable: 1
   Tip: {fileID: 0}
   UniqueId: 1002
 --- !u!1 &849280488
@@ -3663,7 +3663,7 @@ MonoBehaviour:
           description: 
           icon: {fileID: 21300000, guid: 2e80b6574fa96494fbc7ad4386df3a20, type: 3}
           count: 2
-          isStackable: 0
+          isStackable: 1
         colldier: {fileID: 0}
     finished: 0
   - Id: 2008
@@ -3687,7 +3687,7 @@ MonoBehaviour:
           description: 
           icon: {fileID: 21300000, guid: 2e80b6574fa96494fbc7ad4386df3a20, type: 3}
           count: 2
-          isStackable: 0
+          isStackable: 1
         colldier: {fileID: 0}
     finished: 0
   - Id: 2009
@@ -4829,7 +4829,7 @@ MonoBehaviour:
   - {fileID: 1182006370}
   - {fileID: 2139442176}
   inventorySize: 12
-  items: []
+  slotsList: []
 --- !u!4 &1028044924
 Transform:
   m_ObjectHideFlags: 0
@@ -9400,7 +9400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2114658917
 MonoBehaviour:
   m_ObjectHideFlags: 0

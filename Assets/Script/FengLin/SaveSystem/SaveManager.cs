@@ -62,16 +62,16 @@ public class SaveManager : MonoBehaviour
         }
 
         data.inventoryItems.Clear();
-        foreach (var item in BackageManager.instance.items)
+        foreach (var item in BackageManager.instance.slotsList)
         {
             if (item != null)
             {
                 data.inventoryItems.Add(new Item
                 {
-                    id = item.id,
-                    name = item.name,
-                    count = item.count,
-                    isStackable = item.isStackable
+                    id = item.item.id,
+                    name = item.item.name,
+                    count = item.item.count,
+                    isStackable = item.item.isStackable
                 });
             }
             else
@@ -121,7 +121,7 @@ public class SaveManager : MonoBehaviour
             }
         }
 
-        BackageManager.instance.LoadInventoryFromSave(data.inventoryItems);
+        //BackageManager.instance.LoadInventoryFromSave(data.inventoryItems);
 
         Debug.Log("读档完成，物体状态已恢复");
     }

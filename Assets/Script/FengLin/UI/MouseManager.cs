@@ -19,7 +19,7 @@ public class MouseManager : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, Mathf.Infinity);
 
         //检测到物品
-        if (hit.collider != null && hit.collider.CompareTag("BackageGrid") && hit.collider.GetComponent<InventorySlot>().item != null)
+        if (hit.collider != null && hit.collider.CompareTag("BackageGrid") && hit.collider.GetComponent<InventorySlot>(). != null)
         {
             Debug.Log("检测到物品" + hit.collider.GetComponent<InventorySlot>().item.name);
             // 显示面板
