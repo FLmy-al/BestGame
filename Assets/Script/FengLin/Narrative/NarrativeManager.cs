@@ -63,8 +63,8 @@ public class NarrativeManager : MonoBehaviour
         Time.timeScale = 0f;
         OnNarrative = true;
         OnChoise = false;
+        //currentSpeaker = currentNode.narrativeContents[ContentIndex].speaker;
         UpdateDialogue(currentNode.narrativeContents[ContentIndex]);
-        currentSpeaker = currentNode.narrativeContents[ContentIndex].speaker;
     }
     //ÍË³ö¶Ô»°
     public void ExitNarrative()
