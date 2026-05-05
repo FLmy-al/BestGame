@@ -5,18 +5,28 @@ public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
 
-    //public List<Item> allItems; // 把你所有物品拖进去
+    // 必须在 Inspector 里拖入所有物品
+    public List<Item> allItems;
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
+    // 正确写法：从总物品库里找，不是从背包里找
     public Item GetItemById(int id)
     {
-        foreach (var item in BackageManager.instance.items)
+        foreach (var item in allItems)
         {
-            if (item.id == id)
+            if (item != null && item.id == id)
                 return item;
         }
         return null;

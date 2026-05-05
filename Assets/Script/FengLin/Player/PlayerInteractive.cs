@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerInteractive : MonoBehaviour
@@ -58,6 +59,12 @@ public class PlayerInteractive : MonoBehaviour
         if(collision.tag == "InteractiveCollider")
         {
             NarrativeManager.instance.EnterNarrative(collision.gameObject.GetComponent<NPC>().narrativeId);
+        }
+
+        if(collision.tag == "EnterNextScene")
+        {
+            SceneManager.LoadScene(1);
+            BackageManager.instance.UpdateUI();
         }
     }
     //ÍË³ö¼ì²â·¶Î§

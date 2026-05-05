@@ -1,44 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BackageManager : MonoBehaviour
 {
-    public InventorySlot[] slots;  // 所有背包格子
-    public int inventorySize = 20; // 背包总格子数
-    public List<Item> items = new List<Item>(); //物品列表
+    public InventorySlot[] slots;
+    public int inventorySize = 20;
+    public List<Item> items = new List<Item>();
 
-    public static BackageManager instance; //单例模式
+    public static BackageManager instance;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }else
+
+            // 只在第一次创建时初始化
+            items.Clear();
+            for (int i = 0; i < inventorySize; i++)
+            {
+                items.Add(null);
+            }
+        }
+        else
         {
             Destroy(gameObject);
         }
-
-        // 初始化物品列表
-        for (int i = 0; i < inventorySize; i++)
-        {
-            items.Add(null);
-        }
     }
 
-    // 添加物品到背包
     public bool AddItem(Item newItem)
     {
-        Debug.Log("添加物品");
-        // 1. 如果物品可堆叠，先找已有的格子
+        if (newItem == null) return false;
+
         if (newItem.isStackable)
         {
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i] != null && items[i].name == newItem.name)
+                if (items[i].name != "" && items[i].name == newItem.name)
                 {
                     items[i].count += newItem.count;
                     UpdateUI();
@@ -47,7 +46,6 @@ public class BackageManager : MonoBehaviour
             }
         }
 
-        // 2. 找空格子放新物品
         for (int i = 0; i < items.Count; i++)
         {
             if (items[i] == null)
@@ -58,17 +56,15 @@ public class BackageManager : MonoBehaviour
             }
         }
 
-        // 背包满了
-        Debug.Log("背包已满！");
+        Debug.Log("背包满了");
         return false;
     }
 
-    // 移除物品
     public void RemoveItem(string itemName)
     {
         for (int i = 0; i < items.Count; i++)
         {
-            if (items[i] != null && items[i].name == itemName)
+            if (items[i].name != "" && items[i].name == itemName)
             {
                 items[i].count--;
                 if (items[i].count <= 0)
@@ -83,50 +79,50 @@ public class BackageManager : MonoBehaviour
 
     public bool FindItem(string itemName)
     {
-        for (int i = 0; i < items.Count; i++)
+        foreach (var item in items)
         {
-            if (items[i] != null && items[i].name == itemName)
-            {
-                Debug.Log("找到物品" +  items[i].name);
+            if (item != null && item.name == itemName)
                 return true;
-            }
         }
-        Debug.Log("未找到物品");
         return false;
     }
 
-    // 更新所有格子的UI显示
     public void UpdateUI()
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].SetItem(items[i]);
+            if (i < items.Count)
+                slots[i].SetItem(items[i]);
+            else
+                slots[i].SetItem(null);
         }
     }
 
-    // 从存档恢复背包
+    // 修复：加载存档时强制赋值 null
     public void LoadInventoryFromSave(List<Item> savedItems)
     {
-        // 清空当前背包
         items.Clear();
         for (int i = 0; i < inventorySize; i++)
-        {
             items.Add(null);
-        }
 
-        // 恢复存档里的物品
         for (int i = 0; i < savedItems.Count && i < items.Count; i++)
         {
             var saveItem = savedItems[i];
+
             if (saveItem == null)
             {
                 items[i] = null;
                 continue;
             }
 
-            // 找到对应物品（你项目里的 Item 数据源）
             Item originalItem = ItemManager.instance.GetItemById(saveItem.id);
-            if (originalItem != null)
+
+            // 修复：找不到就设为空
+            if (originalItem == null)
+            {
+                items[i] = null;
+            }
+            else
             {
                 Item newItem = originalItem.Clone();
                 newItem.count = saveItem.count;
@@ -134,7 +130,6 @@ public class BackageManager : MonoBehaviour
             }
         }
 
-        // 刷新UI
         UpdateUI();
     }
 }

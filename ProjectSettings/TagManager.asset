@@ -11,6 +11,7 @@ TagManager:
   - a
   - collider
   - InteractiveCollider
+  - EnterNextScene
   layers:
   - Default
   - TransparentFX

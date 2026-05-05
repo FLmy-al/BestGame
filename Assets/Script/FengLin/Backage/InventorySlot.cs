@@ -18,16 +18,16 @@ public class InventorySlot : MonoBehaviour
     // 设置格子物品
     public void SetItem(Item newItem)
     {
-        item = newItem;
-        if (item == null)
+        // 名字为空直接当空格子
+        if (newItem == null || string.IsNullOrEmpty(newItem.name))
         {
-            // 空格子
             icon.enabled = false;
             countText.text = "";
+            item = null;
             return;
         }
 
-        // 有物品
+        item = newItem;
         icon.enabled = true;
         icon.sprite = item.icon;
         countText.text = item.count >= 1 ? item.count.ToString() : "";

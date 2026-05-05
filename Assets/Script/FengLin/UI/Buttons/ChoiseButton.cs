@@ -7,6 +7,7 @@ public class ChoiseButton : MonoBehaviour
 {
     public int nextId;  //对应下一段文本id
     public List<string> needItemName; //需要的物品名
+    public List<Item> GiveItemName; //需要的物品名
     public GameObject colldier; //碰撞箱
     public void PutDown()
     {
@@ -26,6 +27,14 @@ public class ChoiseButton : MonoBehaviour
             if(colldier != null)
             {
                 colldier.gameObject.SetActive(false);
+            }
+        }
+
+        if (GiveItemName.Count != 0)
+        {
+            foreach (Item item in GiveItemName)
+            {
+                BackageManager.instance.AddItem(item);
             }
         }
 
